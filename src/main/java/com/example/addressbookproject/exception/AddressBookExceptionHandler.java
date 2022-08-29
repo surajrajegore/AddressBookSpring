@@ -14,10 +14,15 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class AddressBookExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<AddressBookResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException){
+    public ResponseEntity<AddressBookResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
         List<ObjectError> errorList = methodArgumentNotValidException.getBindingResult().getAllErrors();
         List<String> errorMessage = errorList.stream().map(objectError -> objectError.getDefaultMessage()).collect(Collectors.toList());
-        AddressBookResponseDTO addressBookResponseDTO = new AddressBookResponseDTO("Exception occure while processing the request",errorMessage);
+        AddressBookResponseDTO addressBookResponseDTO = new AddressBookResponseDTO("Exception occure while processing the request", errorMessage);
         return new ResponseEntity<AddressBookResponseDTO>(addressBookResponseDTO, HttpStatus.BAD_REQUEST);
     }
+        @ExceptionHandler(AddressBookException.class)
+        public ResponseEntity<AddressBookResponseDTO> handleAddressBookException(AddressBookException exception){
+            AddressBookResponseDTO AddressBookResponseDTO = new AddressBookResponseDTO("Exception while processing REST Request",exception.getMessage());
+            return new ResponseEntity<AddressBookResponseDTO>(AddressBookResponseDTO, HttpStatus.BAD_REQUEST);
+        }
 }

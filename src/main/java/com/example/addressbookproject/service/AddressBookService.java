@@ -2,6 +2,7 @@ package com.example.addressbookproject.service;
 
 import com.example.addressbookproject.dto.AddressBookDTO;
 import com.example.addressbookproject.entity.AddressBookData;
+import com.example.addressbookproject.exception.AddressBookException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +20,10 @@ public class AddressBookService implements IAddressBookService{
 
     @Override
     public AddressBookData getAddressBookDataById(int personId) {
-        return addressBookList.get(personId-1);
+        return addressBookList.stream()
+                .filter(addressBookData -> addressBookData.getPersonId() == personId)
+                .findFirst()
+                .orElseThrow(() -> new          AddressBookException("User Not Found"));
     }
 
     @Override
