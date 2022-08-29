@@ -8,11 +8,11 @@ public class AddressBookDTO {
     public String address;
     public String city;
     public String state;
-    public Integer zipCode;
+    public int zipCode;
     public Long phoneNumber;
     public String emailId;
 
-    public AddressBookDTO(String firstName, String lastName, String address, String city, String state, Integer zipCode, Long phoneNumber, String emailId) {
+    public AddressBookDTO(String firstName, String lastName, String address, String city, String state,int zipCode, Long phoneNumber, String emailId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
