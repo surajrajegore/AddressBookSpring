@@ -38,7 +38,7 @@ public @Data class AddressBookData {
         this.updateAddressBookData(addressBookDTO);
     }
 
-    private void updateAddressBookData(AddressBookDTO addressBookDTO) {
+    public void updateAddressBookData(AddressBookDTO addressBookDTO) {
         this.firstName = addressBookDTO.firstName;
         this.lastName = addressBookDTO.lastName;
         this.address = addressBookDTO.address;
